@@ -6,7 +6,7 @@ module "aks" {
   source = "Azure/aks/azurerm"
 
   prefix                    = var.nuon_id
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name       = azurerm_resource_group.rg.name
   kubernetes_version        = var.cluster_version
   automatic_channel_upgrade = "patch"
   agents_availability_zones = ["1", "2"]
@@ -49,7 +49,7 @@ module "aks" {
   rbac_aad_managed                                = true
   role_based_access_control_enabled               = true
   sku_tier                                        = "Standard"
-  vnet_subnet_id                                  = module.network.vnet_subnets[0]
+  vnet_subnet_id                                  = data.azurerm_subnet.subnet.id
   attached_acr_id_map = {
     "${azurerm_container_registry.acr.name}" = azurerm_container_registry.acr.id
   }
@@ -61,22 +61,22 @@ module "aks" {
 
   node_pools = {
     "runner" = {
-      name = "runner"
-      vm_size = local.runner_vm_size
-      node_count = 1
-      vnet_subnet_id = module.network.vnet_subnets[0]
+      name                  = "runner"
+      vm_size               = local.runner_vm_size
+      node_count            = 1
+      vnet_subnet_id        = data.azurerm_subnet.subnet.id
       create_before_destroy = true
     }
     "default" = {
-      name = "default"
-      vm_size = var.vm_size
-      node_count = var.node_count
-      vnet_subnet_id = module.network.vnet_subnets[0]
+      name                  = "default"
+      vm_size               = var.vm_size
+      node_count            = var.node_count
+      vnet_subnet_id        = data.azurerm_subnet.subnet.id
       create_before_destroy = true
     }
   }
 
   depends_on = [
-    module.network,
+    data.azurerm_subnet.subnet,
   ]
 }

@@ -1,26 +1,34 @@
-# Azure AKS
+# Azure AKS BYOVPN
 
-Standard Azure sandbox that provisions the following:
-
-* VPN
-* AKS Cluster
+Azure sandbox that provisions an AKS cluster in an existing VPN:
 
 ## Usage
 
-To use this in your BYOC app, please use the `azure-aks` runner type:
+Use this in your BYOC app with a `vpc_id` input and the `azure-ask` runner type.
 
 ```toml
 version = "v1"
 
-[runner]
-runner_type = "azure-aks"
+[inputs]
+[[inputs.input]]
+name = "vpc_id"
+description = "The VPC to install the app in"
+sensitive = false
+display_name = "VPC ID"
+required = true
 
 [sandbox]
 terraform_version = "1.5.4"
 [sandbox.public_repo]
-directory = "azure-aks"
 repo = "nuonco/sandboxes"
+directory = "azure-aks-byovpn"
 branch = "main"
+[[sandbox.var]]
+name = "vpc_id"
+value = "{{.nuon.install.inputs.vpc_id}}"
+
+[runner]
+runner_type = "azure-aks"
 ```
 
 ## Testing

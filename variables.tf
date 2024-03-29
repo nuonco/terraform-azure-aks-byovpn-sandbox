@@ -1,3 +1,18 @@
+variable "network_name" {
+  type        = string
+  description = "The name of the Azure Virtual Network to provision the AKS cluster in."
+}
+
+variable "resource_group_name" {
+  type        = string
+  description = "The name of the Azure Resource Group the Virtual Network is in."
+}
+
+variable "subnet_name" {
+  type        = string
+  description = "The name of the Vnet Subnet to provision the AKS cluster in."
+}
+
 variable "nuon_id" {
   type        = string
   description = "The nuon id for this install. Used for naming purposes."

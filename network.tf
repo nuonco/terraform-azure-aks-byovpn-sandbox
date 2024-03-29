@@ -6,32 +6,18 @@ locals {
   subnet_names = ["a", "b", "c"]
 
   // app and services
-  appgw_cidr = "10.2.0.0/24"
-  service_cidr = "10.2.1.0/24"
+  appgw_cidr     = "10.2.0.0/24"
+  service_cidr   = "10.2.1.0/24"
   dns_service_ip = "10.2.1.10"
 }
 
-module "network" {
-  source              = "Azure/network/azurerm"
-  resource_group_name = azurerm_resource_group.rg.name
-  address_spaces      = local.address_spaces
+data "azurerm_virtual_network" "network" {
+  name                = var.network_name
+  resource_group_name = var.resource_group_name
+}
 
-  // we create three subnets - one for the nodes, one for ingresses and one for pods
-  subnet_prefixes     = local.subnet_cidrs
-  subnet_names        = local.subnet_names
-
-  subnet_service_endpoints = {
-    (local.subnet_names[2]) : ["Microsoft.Storage", "Microsoft.Sql"],
-  }
-  subnet_enforce_private_link_endpoint_network_policies = {
-    (local.subnet_names[2]) : true
-  }
-
-  use_for_each = true
-  tags = {
-    environment = "dev"
-    costcenter  = "it"
-  }
-
-  depends_on = [azurerm_resource_group.rg]
+data "azurerm_subnet" "subnet" {
+  name                 = var.subnet_name
+  virtual_network_name = data.azurerm_virtual_network.network.name
+  resource_group_name  = data.azurerm_virtual_network.network.resource_group_name
 }

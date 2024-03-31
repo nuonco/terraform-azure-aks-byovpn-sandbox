@@ -4,31 +4,56 @@ Azure sandbox that provisions an AKS cluster in an existing VPN:
 
 ## Usage
 
-Use this in your BYOC app with a `vpc_id` input and the `azure-ask` runner type.
+You can use this sandbox in your app via the [azure-aks-byovpn project](https://github.com/nuonco/sandboxes/tree/main/azure-aks-byovpn) in our sandboxes repo. Add it to your app using the following config:
 
-```toml
-version = "v1"
+```hcl
+resource "nuon_app" "main" {
+  name = "my_azure_aks_byovpn_app"
+}
 
-[inputs]
-[[inputs.input]]
-name = "vpc_id"
-description = "The VPC to install the app in"
-sensitive = false
-display_name = "VPC ID"
-required = true
+resource "nuon_app_input" "main" {
+  app_id = nuon_app.main.id
 
-[sandbox]
-terraform_version = "1.5.4"
-[sandbox.public_repo]
-repo = "nuonco/sandboxes"
-directory = "azure-aks-byovpn"
-branch = "main"
-[[sandbox.var]]
-name = "vpc_id"
-value = "{{.nuon.install.inputs.vpc_id}}"
+  input {
+    name = "resource_group_name"
+    description = "The Resource Group of the VPN to install the app in."
+    sensitive = false
+    display_name = "Resource Group Name"
+    required = true
+  }
 
-[runner]
-runner_type = "azure-aks"
+  input {
+    name = "network_name"
+    description = "The VPN to install the app in."
+    sensitive = false
+    display_name = "Network Name"
+    required = true
+  }
+
+  input {
+    name = "subnet_name"
+    description = "The Subnet in the VPN to install the app in."
+    sensitive = false
+    display_name = "Subnet Name"
+    required = true
+  }
+}
+
+resource "nuon_app_sandbox" "main" {
+  app_id = nuon_app.main.id
+  terraform_version = "v1.6.3"
+
+  public_repo = {
+    repo = "nuonco/sandboxes"
+    branch = "main"
+    directory = "azure-aks-byovpn"
+  }
+}
+
+resource "nuon_app_runner" "main" {
+  app_id      = nuon_app.main.id
+  runner_type = "azure-aks"
+}
 ```
 
 ## Testing

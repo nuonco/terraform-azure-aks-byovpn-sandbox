@@ -18,7 +18,7 @@ resource "azurerm_role_definition" "runner" {
 resource "azurerm_user_assigned_identity" "runner" {
   name                = "${var.nuon_id}-runner"
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
 }
 
 resource "azurerm_role_assignment" "role_assignment" {

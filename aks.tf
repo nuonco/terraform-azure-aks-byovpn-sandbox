@@ -6,15 +6,15 @@ module "aks" {
   source = "Azure/aks/azurerm"
 
   prefix                    = var.nuon_id
-  resource_group_name       = azurerm_resource_group.rg.name
+  resource_group_name       = data.azurerm_resource_group.rg.name
   kubernetes_version        = var.cluster_version
   automatic_channel_upgrade = "patch"
-  agents_availability_zones = ["1", "2"]
-  agents_count              = null
-  agents_max_count          = 2
-  agents_max_pods           = 100
-  agents_min_count          = 1
-  agents_pool_name          = "agents"
+  # agents_availability_zones = ["1", "2"]
+  agents_count     = null
+  agents_max_count = 2
+  agents_max_pods  = 100
+  agents_min_count = 1
+  agents_pool_name = "agents"
   agents_pool_linux_os_configs = [
     {
       transparent_huge_page_enabled = "always"

@@ -39,7 +39,7 @@ output "account" {
     "location"            = var.location
     "subscription_id"     = data.azurerm_client_config.current.subscription_id
     "client_id"           = data.azurerm_client_config.current.client_id
-    "resource_group_name" = azurerm_resource_group.rg.name
+    "resource_group_name" = data.azurerm_resource_group.rg.name
   }
   description = "A map of Azure account attributes: location, subscription_id, client_id, resource_group_name."
 }

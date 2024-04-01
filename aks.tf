@@ -6,7 +6,7 @@ module "aks" {
   source = "Azure/aks/azurerm"
 
   prefix                    = var.nuon_id
-  resource_group_name       = azurerm_resource_group.rg.name
+  resource_group_name       = data.azurerm_resource_group.rg.name
   kubernetes_version        = var.cluster_version
   automatic_channel_upgrade = "patch"
   agents_availability_zones = ["1", "2"]

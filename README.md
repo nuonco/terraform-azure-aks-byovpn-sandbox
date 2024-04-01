@@ -48,6 +48,21 @@ resource "nuon_app_sandbox" "main" {
     branch = "main"
     directory = "azure-aks-byovpn"
   }
+
+  var {
+    name = "resource_group_name"
+    value = "{{.nuon.install.inputs.resource_group_name}}"
+  }
+
+  var {
+    name = "network_name"
+    value = "{{.nuon.install.inputs.network_name}}"
+  }
+
+  var {
+    name = "subnet_name"
+    value = "{{.nuon.install.inputs.subnet_name}}"
+  }
 }
 
 resource "nuon_app_runner" "main" {

@@ -50,6 +50,7 @@ module "aks" {
   role_based_access_control_enabled               = true
   sku_tier                                        = "Standard"
   vnet_subnet_id                                  = data.azurerm_subnet.subnet.id
+  temporary_name_for_rotation                     = "${var.nuon_id}-temp"
   attached_acr_id_map = {
     "${azurerm_container_registry.acr.name}" = azurerm_container_registry.acr.id
   }

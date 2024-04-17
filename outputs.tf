@@ -18,9 +18,9 @@ output "vpn" {
 
 output "public_domain" {
   value = {
-    nameservers = azurerm_dns_zone.public.name_servers
-    name        = azurerm_dns_zone.public.name
-    id          = azurerm_dns_zone.public.id
+    #nameservers = azurerm_dns_zone.public.name_servers
+    #name        = azurerm_dns_zone.public.name
+    #id          = azurerm_dns_zone.public.id
   }
   description = "A map of public domain attributes: nameservers, name, id."
 }

@@ -32,15 +32,17 @@ module "aks" {
   enable_auto_scaling    = true
   enable_host_encryption = false
 
-  green_field_application_gateway_for_ingress = {
-    name        = "ingress"
-    subnet_cidr = local.appgw_cidr
-  }
+  // https://azure.github.io/application-gateway-kubernetes-ingress/setup/install-new/
+  //
+  // NOTE(jm): once we decide to enable ingress'ed applications using gateway, uncomment this and add a gateway cidr to
+  // parameters.
+  #green_field_application_gateway_for_ingress = {
+  #name        = "ingress"
+  #subnet_cidr = local.appgw_cidr
+  #}
   create_role_assignments_for_application_gateway = true
   local_account_disabled                          = false
   log_analytics_workspace_enabled                 = false
-  net_profile_dns_service_ip                      = local.dns_service_ip
-  net_profile_service_cidr                        = local.service_cidr
   network_plugin                                  = "azure"
   network_policy                                  = "azure"
   os_disk_size_gb                                 = 60

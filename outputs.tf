@@ -28,8 +28,8 @@ output "public_domain" {
 output "internal_domain" {
   value = {
     nameservers = []
-    name        = azurerm_private_dns_zone.internal.name
-    id          = azurerm_private_dns_zone.internal.id
+    #name        = azurerm_private_dns_zone.internal.name
+    #id          = azurerm_private_dns_zone.internal.id
   }
   description = "A map of internal domain attributes: nameservers, name, id."
 }

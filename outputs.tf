@@ -1,9 +1,9 @@
 output "runner" {
   value = {
-    id           = azurerm_user_assigned_identity.runner.id
-    tenant_id    = azurerm_user_assigned_identity.runner.tenant_id
-    client_id    = azurerm_user_assigned_identity.runner.client_id
-    principal_id = azurerm_user_assigned_identity.runner.principal_id
+    #id           = azurerm_user_assigned_identity.runner.id
+    #tenant_id    = azurerm_user_assigned_identity.runner.tenant_id
+    #client_id    = azurerm_user_assigned_identity.runner.client_id
+    #principal_id = azurerm_user_assigned_identity.runner.principal_id
   }
   description = "A map of runner attributes: id, tenant_id, client_id, principal_id."
 }

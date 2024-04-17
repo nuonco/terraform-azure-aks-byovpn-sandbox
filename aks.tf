@@ -58,7 +58,7 @@ module "aks" {
   }
 
   identity_ids = [
-    azurerm_user_assigned_identity.runner.id
+    #azurerm_user_assigned_identity.runner.id
   ]
   identity_type = "UserAssigned"
 

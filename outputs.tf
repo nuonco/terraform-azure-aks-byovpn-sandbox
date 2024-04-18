@@ -1,5 +1,6 @@
 output "runner" {
   value = {
+    # TODO(jm): make the runner identity optional, so it can have read/write access to the sandbox based on inputs.
     #id           = azurerm_user_assigned_identity.runner.id
     #tenant_id    = azurerm_user_assigned_identity.runner.tenant_id
     #client_id    = azurerm_user_assigned_identity.runner.client_id
@@ -18,18 +19,20 @@ output "vpn" {
 
 output "public_domain" {
   value = {
-    #nameservers = azurerm_dns_zone.public.name_servers
-    #name        = azurerm_dns_zone.public.name
-    #id          = azurerm_dns_zone.public.id
+    enabled = var.enable_public_dns
+    nameservers = var.enable_public_dns ? azurerm_dns_zone.public[0].name_servers : []
+    name        = var.enable_public_dns ? azurerm_dns_zone.public[0].name : ""
+    id          = var.enable_public_dns ? azurerm_dns_zone.public[0].id : ""
   }
   description = "A map of public domain attributes: nameservers, name, id."
 }
 
 output "internal_domain" {
   value = {
+    enabled = var.enable_private_dns
     nameservers = []
-    #name        = azurerm_private_dns_zone.internal.name
-    #id          = azurerm_private_dns_zone.internal.id
+    name        = var.enable_private_dns ? azurerm_private_dns_zone.internal[0].name : ""
+    id          = var.enable_private_dns ? azurerm_private_dns_zone.internal[0].id : ""
   }
   description = "A map of internal domain attributes: nameservers, name, id."
 }

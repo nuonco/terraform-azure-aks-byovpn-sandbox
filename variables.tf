@@ -81,3 +81,8 @@ variable "username" {
   description = "The admin username for the new cluster."
   default     = "azureadmin"
 }
+
+variable "max_pods" {
+  type = number
+  default = 20
+}

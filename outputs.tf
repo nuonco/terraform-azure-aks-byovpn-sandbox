@@ -19,9 +19,9 @@ output "vpn" {
 
 output "public_domain" {
   value = {
-    nameservers = var.public_dns_enabled ? azurerm_dns_zone.public[0].name_servers : []
-    name        = var.public_dns_enabled ? azurerm_dns_zone.public[0].name : ""
-    id          = var.public_dns_enabled ? azurerm_dns_zone.public[0].id : ""
+    nameservers = var.enable_public_dns ? azurerm_dns_zone.public[0].name_servers : []
+    name        = var.enable_public_dns ? azurerm_dns_zone.public[0].name : ""
+    id          = var.enable_public_dns ? azurerm_dns_zone.public[0].id : ""
   }
   description = "A map of public domain attributes: nameservers, name, id."
 }
@@ -29,8 +29,8 @@ output "public_domain" {
 output "internal_domain" {
   value = {
     nameservers = []
-    name        = var.internal_dns_enabled ? azurerm_private_dns_zone.internal[0].name : ""
-    id          = var.internal_dns_enabled ? azurerm_private_dns_zone.internal[0].id : ""
+    name        = var.enable_private_dns ? azurerm_private_dns_zone.internal[0].name : ""
+    id          = var.enable_private_dns ? azurerm_private_dns_zone.internal[0].id : ""
   }
   description = "A map of internal domain attributes: nameservers, name, id."
 }

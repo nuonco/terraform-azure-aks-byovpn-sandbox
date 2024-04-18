@@ -84,5 +84,5 @@ variable "username" {
 
 variable "max_pods" {
   type = number
-  default = 20
+  default = 30
 }

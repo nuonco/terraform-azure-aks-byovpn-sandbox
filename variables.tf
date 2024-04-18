@@ -86,3 +86,13 @@ variable "max_pods" {
   type = number
   default = 30
 }
+
+variable "agents_max_count" {
+  type = number
+  default = 1
+}
+
+variable "agents_min_count" {
+  type = number
+  default = 1
+}

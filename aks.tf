@@ -12,7 +12,7 @@ module "aks" {
   agents_availability_zones = length(local.azs) > 0 ? local.azs : null
   agents_count              = null
   agents_max_count          = 2
-  agents_max_pods           = 100
+  agents_max_pods           = var.max_pods
   agents_min_count          = 1
   agents_pool_name          = "agents"
   agents_pool_linux_os_configs = [

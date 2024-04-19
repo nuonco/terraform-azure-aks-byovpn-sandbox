@@ -70,6 +70,12 @@ module "aks" {
       vm_size               = var.vm_size
       node_count            = var.node_count
       vnet_subnet_id        = data.azurerm_subnet.subnet.id
+      node_labels           = {
+        "workload" = "true"
+      }
+      node_taints            = [
+        "workload=true:NoSchedule"
+      ]
       create_before_destroy = true
     }
   }

@@ -72,7 +72,7 @@ variable "cluster_version" {
 
 variable "vm_size" {
   type        = string
-  default     = "Standard_D8s_v3"
+  default     = "Standard_D2_v2"
   description = "The image size."
 }
 

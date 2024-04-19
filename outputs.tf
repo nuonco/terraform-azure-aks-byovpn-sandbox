@@ -19,7 +19,7 @@ output "vpn" {
 
 output "public_domain" {
   value = {
-    enabled = var.enable_public_dns
+    enabled     = var.enable_public_dns
     nameservers = var.enable_public_dns ? azurerm_dns_zone.public[0].name_servers : []
     name        = var.enable_public_dns ? azurerm_dns_zone.public[0].name : ""
     id          = var.enable_public_dns ? azurerm_dns_zone.public[0].id : ""
@@ -29,7 +29,7 @@ output "public_domain" {
 
 output "internal_domain" {
   value = {
-    enabled = var.enable_private_dns
+    enabled     = var.enable_private_dns
     nameservers = []
     name        = var.enable_private_dns ? azurerm_private_dns_zone.internal[0].name : ""
     id          = var.enable_private_dns ? azurerm_private_dns_zone.internal[0].id : ""

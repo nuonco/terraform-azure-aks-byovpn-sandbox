@@ -56,6 +56,9 @@ module "aks" {
   attached_acr_id_map = {
     "${azurerm_container_registry.acr.name}" = azurerm_container_registry.acr.id
   }
+  network_contributor_role_assigned_subnet_ids = {
+    vnet_subnet = data.azurerm_subnet.subnet.id
+  }
 
   node_pools = {
     "runner" = {
@@ -66,14 +69,14 @@ module "aks" {
       create_before_destroy = true
     }
     "default" = {
-      name                  = "default"
-      vm_size               = var.vm_size
-      node_count            = var.node_count
-      vnet_subnet_id        = data.azurerm_subnet.subnet.id
-      node_labels           = {
+      name           = "default"
+      vm_size        = var.vm_size
+      node_count     = var.node_count
+      vnet_subnet_id = data.azurerm_subnet.subnet.id
+      node_labels = {
         "workload" = "true"
       }
-      node_taints            = [
+      node_taints = [
         "workload=true:NoSchedule"
       ]
       create_before_destroy = true

@@ -1,13 +1,13 @@
 variable "enable_private_dns" {
-  type = bool
+  type        = bool
   description = "whether to enable private dns zone"
-  default = true
+  default     = true
 }
 
 variable "enable_public_dns" {
-  type = bool
+  type        = bool
   description = "whether to enable public dns zone"
-  default = true
+  default     = true
 }
 
 variable "network_name" {
@@ -95,16 +95,16 @@ variable "username" {
 }
 
 variable "max_pods" {
-  type = number
+  type    = number
   default = 30
 }
 
 variable "agents_max_count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "agents_min_count" {
-  type = number
+  type    = number
   default = 1
 }

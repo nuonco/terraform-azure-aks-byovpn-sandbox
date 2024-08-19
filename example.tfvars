@@ -1,0 +1,7 @@
+network_name = "customer-network-name"
+resource_group_name = "customer-resource-group-name"
+subnet_name = "subnet-id"
+nuon_id              = "plzxletmtwkqzizk"
+location             = "eastus"
+internal_root_domain = "foo.nuon.run"
+public_root_domain   = "public.nuon.run"
